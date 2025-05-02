@@ -1,0 +1,14 @@
+.GalleryCard {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 1rem;
+  object-fit: contain;
+  object-position: center;
+  background-color: var(--mid1);
+  text-align: center;
+  align-content: center;
+  
+  &:hover {
+    filter: brightness(1.3);
+  }
+}

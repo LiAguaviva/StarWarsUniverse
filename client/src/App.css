@@ -6,6 +6,8 @@
 
 body {
   font-family: roboto;
+  background-color: var(--dark);
+  color: var(--light);
 }
 
 .spin {

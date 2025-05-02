@@ -1,0 +1,23 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .categoryButtons {
+    display: flex;
+    gap: 2rem;
+    margin-inline: auto;
+
+    button {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--mid3);
+      font-size: 1.2rem;
+
+      &:hover {
+        border-bottom: 2px solid var(--mid3);
+      }
+    }
+  }
+}

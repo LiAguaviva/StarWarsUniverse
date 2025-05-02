@@ -1,0 +1,43 @@
+:root {
+  /* PALETTE 1 */
+  --dark: rgb(20, 19, 19);
+  --light: rgb(244, 242, 229);
+  --mid1: rgb(78, 85, 108);
+  --mid2: rgb(243, 90, 34);
+  --mid3: rgb(255, 196, 0);
+
+  /* PALETTE 2 */
+  /* --color1: rgb(235, 230, 221);
+  --color2: rgb(236, 255, 25);
+  --color3: rgb(255, 51, 102);
+  --color4: rgb(114, 110, 109);
+  --color5: rgb(32, 32, 32); */
+
+  /* PALETTE 3 */
+  /* --color1: rgb(215, 207, 192);
+  --color2: rgb(1, 161, 118);
+  --color3: rgb(232, 95, 129);
+  --color4: rgb(89, 55, 151);
+  --color5: rgb(31, 30, 29); */
+
+  /* SIZES */
+  --size05: 0.5rem;
+  --size1: 1rem;
+  --size2: 2rem;
+  --size3: 3rem;
+  --size4: 4rem;
+  --size5: 5rem;
+
+  /* TEXT */
+  --textSize1: 5.2rem;
+  --textSize2: 3.5rem;
+  --textSize3: 3rem;
+  --textSize4: 1.5rem;
+  --textSize5: 1rem;
+
+  /* VIEW */
+
+  --headerSize: 10vh;
+  --mainSize: 80vh;
+  --footerSize:10vh;
+}
