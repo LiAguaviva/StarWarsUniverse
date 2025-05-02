@@ -62,6 +62,7 @@ export const Home = () => {
             <Gallery 
               data={data}
               selectItem={selectItem}
+              category={category}
               />
           </div>
         </>

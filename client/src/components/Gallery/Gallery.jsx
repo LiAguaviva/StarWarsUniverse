@@ -2,7 +2,7 @@ import React from 'react'
 import './Gallery.css'
 import { GalleryCard } from '../GalleryCard/GalleryCard'
 
-export const Gallery = ({data, selectItem}) => {
+export const Gallery = ({data, selectItem, category}) => {
   
   return (
     <div className='gallery'>
@@ -12,6 +12,7 @@ export const Gallery = ({data, selectItem}) => {
             key={idx} 
             elem={elem}
             selectItem={selectItem}
+            category={category}
           />
         )
       })}
