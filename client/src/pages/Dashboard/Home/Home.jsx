@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { InfoCard } from '../../../components/InfoCard/InfoCard';
 import { Gallery } from '../../../components/Gallery/Gallery';
+import { getData } from '../../../helpers/axiosHelper';
 
 export const Home = () => {
 
@@ -14,9 +15,7 @@ export const Home = () => {
   const [showInfo, setShowInfo] = useState(false)
 
   useEffect(() => {
-    axios
-      .get(`https://swapi.py4e.com/api/${category}/`)
-      // pixar: .get('http://93.93.117.48/api/films')
+    getData(category)
       .then((res)=> {
         setData(res.data)
         setDataInfo(res.data.results[0]);
@@ -31,11 +30,23 @@ export const Home = () => {
     setCategory(cat)
     setShowInfo(true);
   }
-  
+
+  const handlePage = (url)=> {
+    axios
+      .get(url)
+      .then((res) => {
+        setData(res.data)
+        selectItem(res.data.results[0])
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   const selectItem = (item) => setDataInfo(item);
 
 
-  console.log('data', data);
+  // console.log('data', data);
   
   return (
     <div className='homePage'>
@@ -63,6 +74,7 @@ export const Home = () => {
               data={data}
               selectItem={selectItem}
               category={category}
+              handlePage={handlePage}
               />
           </div>
         </>

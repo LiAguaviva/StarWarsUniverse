@@ -3,4 +3,10 @@
   flex-wrap: wrap;
   column-gap: 1rem;
   row-gap: 4rem;
+  align-items: center;
+  justify-content: center;
+
+  .arrow {
+    height: 2rem;
+  }
 }

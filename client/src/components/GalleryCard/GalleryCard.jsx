@@ -22,7 +22,7 @@ export const GalleryCard = ({elem, selectItem, category}) => {
     >
      
       <img 
-        src={`https://starwars-visualguide.com/assets/img/${category==="people"?"characters":category}/${getIdFromUrl(elem.url)}.jpg`}  
+        src={`images/${category}/${getIdFromUrl(elem.url)}.${'jpg' ? 'jpg' : 'JPG'}`}
         alt="" 
         ref={imgRef}
         onError={useBrokenImg}
