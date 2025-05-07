@@ -18,11 +18,11 @@ export const GalleryCard = ({elem, selectItem, category}) => {
   return (
     <div 
       className='GalleryCard'
-      onClick={selectCard}
-    >
+      >
      
       <img 
-        src={`images/${category}/${getIdFromUrl(elem.url)}.${'jpg' ? 'jpg' : 'JPG'}`}
+        onClick={selectCard}
+        src={`images/${category}/${getIdFromUrl(elem.url)}.jpg`}
         alt="" 
         ref={imgRef}
         onError={useBrokenImg}

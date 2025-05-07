@@ -13,8 +13,9 @@ export const Home = () => {
   const [dataInfo, setDataInfo] = useState({});
   const [category, setCategory] = useState('films')
   const [showInfo, setShowInfo] = useState(false)
+  const [selectedItem, setSelectedItem] = useState('')
 
-  useEffect(() => {
+  /* useEffect(() => {
     getData(category)
       .then((res)=> {
         setData(res.data)
@@ -24,15 +25,34 @@ export const Home = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [category])
+  }, []) */
 
-  const handleCategory = (cat) => {
-    setCategory(cat)
-    setShowInfo(true);
-  }
-
-  const handlePage = (url)=> {
-    axios
+  useEffect(() => {
+    getData(category)
+      .then((res) => {
+        setData(res.data);
+        if (selectedItem) {
+          axios.get(selectedItem.url)
+            .then(res => {
+              setDataInfo(res.data);
+            });
+            setSelectedItem(null); 
+        } else {
+          setDataInfo(res.data.results[0]); // usamos el primero
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }, [category]);
+    
+    const handleCategory = (cat) => {
+      setCategory(cat)
+      setShowInfo(true);
+    }
+    
+    const handlePage = (url)=> {
+      axios
       .get(url)
       .then((res) => {
         setData(res.data)
@@ -41,12 +61,19 @@ export const Home = () => {
       .catch((error) => {
         console.log(error);
       })
-  }
-
+    }
+    
+    const handleNavigation = (newCategory, elem) => {
+      setSelectedItem(elem);
+      handleCategory(newCategory);
+  };  
+  
   const selectItem = (item) => setDataInfo(item);
-
-
+  
   // console.log('data', data);
+  console.log('datainfo', dataInfo);
+
+  
   
   return (
     <div className='homePage'>
@@ -67,6 +94,9 @@ export const Home = () => {
             <InfoCard 
               dataInfo={dataInfo} 
               category={category}
+              handleCategory={handleCategory}
+              selectItem={selectItem}
+              handleNavigation={handleNavigation}
               />
           </div>
           <div>

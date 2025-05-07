@@ -16,6 +16,7 @@
       font-size: 1.2rem;
 
       &:hover {
+        transition: transform 0.2s ease;
         border-bottom: 2px solid var(--mid3);
       }
     }

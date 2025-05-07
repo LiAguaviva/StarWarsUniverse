@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
-import './InfoCard.css'
-import brokenImg from '../../assets/brokenImg.jpg'
+import React, { useEffect, useState } from 'react'
+// import { useNavigate } from 'react-router-dom';
 import { getIdFromUrl } from '../../utils/utils';
 import axios from 'axios';
+import { DataFilms } from './DataFilms';
+import './InfoCard.css'
 
-export const InfoCard = ({dataInfo, category}) => {
+export const InfoCard = ({dataInfo, category, selectItem, handleCategory, handleNavigation}) => {
 
   const {url} = dataInfo;
   
@@ -64,65 +65,48 @@ export const InfoCard = ({dataInfo, category}) => {
   
   }, [dataInfo]);
 
-  const imgRef = useRef();
 
   const useBrokenImg = (e) => {
-    // if (!e.target.src.includes('brokenImg.jpg')){
-      imgRef.current.src = brokenImg
-    // }
+    if (!e.target.src.includes('brokenImg.jpg')) {
+      e.target.src = 'images/brokenImg.jpg';
+    }
   }
 
-  // console.log('src:::::', `images/${category}/${getIdFromUrl(url)}.jpg`);
-  // console.log('/////////////////////////////////', `images/people/${getIdFromUrl(url)}.jpg`);
+  // const navigate = useNavigate();
+  
+  // const handleNavigation = (category, id) => {
+  //   navigate(`https://swapi.py4e.com/api/${category}/${id}`)
+  // }
 
-  console.log('datainfo', dataInfo);
+
+
+
+  // console.log('datainfo', dataInfo);
   console.log('homeworld', homeworld);
-  // console.log('charUrl:', charUrl);
   
 
   return (
     <div className='infoCard'>
-      <h2>{dataInfo.name && dataInfo.name}</h2>
-      <h2>{dataInfo.title && dataInfo.title}</h2>
       <img 
         src={`images/${category}/${getIdFromUrl(url)}.jpg`}  
-          
+        className='infoImg'
         alt="" 
         onError={useBrokenImg}
-        ref={imgRef}
-      />
+        />
 
+        <h2>{dataInfo.name && dataInfo.name}</h2>
+        <h2>{dataInfo.title && dataInfo.title}</h2>
       {category === 'films' &&
-        <>
-          <p>EPISODE {dataInfo.episode_id}</p>
-          <p>Release on: {dataInfo.release_date}</p>
-          <p>{dataInfo.opening_crawl}</p>
-          <p>Producer: {dataInfo.producer}</p>
-          <p>Characters: {relatedData.characters.join(', ')}</p>
-          {relatedData.characters.length > 0 && (
-            <div>
-              <h3>Characters:</h3>
-              <div className="related-gallery">
-                {relatedData.characters.map((char, i) => (
-                  <>
-                  {char.name}
-                  <img 
-                    key={i}
-                    src={`images/people/${getIdFromUrl(char.url)}.jpg`}
-                    alt=""
-                    onError={useBrokenImg}
-                    className="related-img"
-                  />
-                  </>
-                ))}
-              </div>
-            </div>
-          )}
-          <p>Planets: {relatedData.planets.join(', ')}</p>
-          <p>Species: {relatedData.species.join(', ')}</p>
-          <p>Starships: {relatedData.starships.join(', ')}</p>
-          <p>Vehicles: {relatedData.vehicles.join(', ')}</p>
-        </>
+          <DataFilms 
+            dataInfo={dataInfo} 
+            relatedData={relatedData}
+            useBrokenImg={useBrokenImg}
+            // handleNavigation2={handleNavigation2}
+            selectItem={selectItem}
+            handleCategory={handleCategory}
+            category={category}
+            handleNavigation={handleNavigation}
+          />
       }
 
       {category === 'people' &&
