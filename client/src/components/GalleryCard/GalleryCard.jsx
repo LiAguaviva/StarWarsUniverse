@@ -16,20 +16,19 @@ export const GalleryCard = ({elem, selectItem, category}) => {
   }
 
   return (
-    <div 
-      className='GalleryCard'
-      >
-     
+    <div className='GalleryCard' >
+      <div className='imgContainer'>
       <img 
         onClick={selectCard}
         src={`images/${category}/${getIdFromUrl(elem.url)}.jpg`}
         alt="" 
         ref={imgRef}
         onError={useBrokenImg}
-      />
+        />
+      </div>
 
-    <p>{elem.name}</p>
-    <p>{elem.title}</p>
+      <p>{elem.name}</p>
+      <p>{elem.title}</p>
     </div>
   )
 }

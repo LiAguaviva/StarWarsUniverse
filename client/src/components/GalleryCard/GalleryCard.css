@@ -1,17 +1,34 @@
 .GalleryCard {
-  width: 8rem;
-  height: 10rem;
   object-fit: contain;
   text-align: center;
+  
+  &:hover {
+
+    img {
+      transition: transform 0.2s ease;
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+/* to-top??? */
+
+    /* p {
+      transition: transform 0.2s ease;
+      transform: scale(1.25);
+    } */
+  }
+  .imgContainer {
+    width: 8rem;
+    height: 10rem;  
+
+  }
   
   img {
     object-position: top;
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    
   }
   
-  &:hover {
-    filter: brightness(1.3);
-  }
 }

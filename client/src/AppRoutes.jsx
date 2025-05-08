@@ -7,11 +7,12 @@ export const AppRoutes = () => {
   return (
     <div>
       <BrowserRouter>
+            <div className='galaxy'/>
         <header>
-          <NavbarApp />
+          {/* <NavbarApp /> */}
         </header>
 
-        <main>
+        <main className='containerPpal'>
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>

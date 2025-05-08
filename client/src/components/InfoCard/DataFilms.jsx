@@ -1,9 +1,7 @@
-import axios from 'axios';
 import { getIdFromUrl } from '../../utils/utils'
-import { useEffect } from 'react';
 
 
-export const DataFilms = ({dataInfo, relatedData, useBrokenImg, selectItem, handleCategory, category, handleNavigation}) => {
+export const DataFilms = ({dataInfo, relatedData, useBrokenImg, handleNavigation}) => {
 
  /*  const handleNavigation = (category, elem) => {
     handleCategory(category);

@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, button, textarea {
+  font-family: 'saira', sans-serif !important;
+  color: blue;
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.containerPpal {
+  margin-top: 7rem;
+  margin-bottom: 10rem;
+  padding-inline: 3rem;
+ /* padding-inline: 5rem; */
+}

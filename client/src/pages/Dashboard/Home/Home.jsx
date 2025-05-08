@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Home.css'
+import swLogo from '../../../assets/star-wars.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { InfoCard } from '../../../components/InfoCard/InfoCard';
@@ -77,19 +78,29 @@ export const Home = () => {
   
   return (
     <div className='homePage'>
+      <img src={swLogo} className='swLogoHome' alt="" />
       {data ?
         <>
         <div className='categoryButtons'>
-          <button onClick={()=>handleCategory('films')}>Movies</button>
-          <button onClick={()=>handleCategory('people')}>Characters</button>
-          <button onClick={()=>handleCategory('vehicles')}>Vehicles</button>
-          <button onClick={()=>handleCategory('species')}>Species</button>
-          <button onClick={()=>handleCategory('planets')}>Planets</button>
-          <button onClick={()=>handleCategory('starships')}>Starships</button>
+          <button onClick={()=>handleCategory('films')}><p className='text-shadow-pop-top'>Movies</p></button>
+          <button onClick={()=>handleCategory('people')}><p className='text-shadow-pop-top'>Characters</p></button>
+          <button onClick={()=>handleCategory('vehicles')}><p className='text-shadow-pop-top'>Vehicles</p></button>
+          <button onClick={()=>handleCategory('species')}><p className='text-shadow-pop-top'>Species</p></button>
+          <button onClick={()=>handleCategory('planets')}><p className='text-shadow-pop-top'>Planets</p></button>
+          <button onClick={()=>handleCategory('starships')}><p className='text-shadow-pop-top'>Starships</p></button>
         </div>
 
         {showInfo &&
           <>
+           <div>
+            <Gallery 
+              data={data}
+              selectItem={selectItem}
+              category={category}
+              handlePage={handlePage}
+              />
+          </div>
+
           <div>
             <InfoCard 
               dataInfo={dataInfo} 
@@ -97,14 +108,6 @@ export const Home = () => {
               handleCategory={handleCategory}
               selectItem={selectItem}
               handleNavigation={handleNavigation}
-              />
-          </div>
-          <div>
-            <Gallery 
-              data={data}
-              selectItem={selectItem}
-              category={category}
-              handlePage={handlePage}
               />
           </div>
         </>
