@@ -14,6 +14,7 @@ export const Home = () => {
   const [dataInfo, setDataInfo] = useState({});
   const [category, setCategory] = useState('films')
   const [showInfo, setShowInfo] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
   const [selectedItem, setSelectedItem] = useState('')
 
   /* useEffect(() => {
@@ -48,8 +49,9 @@ export const Home = () => {
     }, [category]);
     
     const handleCategory = (cat) => {
-      setCategory(cat)
+      setCategory(cat);
       setShowInfo(true);
+      setShowWelcome(false);
     }
     
     const handlePage = (url)=> {
@@ -68,6 +70,12 @@ export const Home = () => {
       setSelectedItem(elem);
       handleCategory(newCategory);
   };  
+
+  const showHomePage = () => {
+    setShowWelcome(true)
+    setShowInfo(false)
+  }
+
   
   const selectItem = (item) => setDataInfo(item);
   
@@ -78,7 +86,12 @@ export const Home = () => {
   
   return (
     <div className='homePage'>
-      <img src={swLogo} className='swLogoHome' alt="" />
+      <img 
+        src={swLogo} 
+        className='swLogoHome' 
+        alt="star wars logo"
+        onClick={showHomePage} 
+      />
       {data ?
         <>
         <div className='categoryButtons'>
@@ -89,6 +102,24 @@ export const Home = () => {
           <button onClick={()=>handleCategory('planets')}><p className='text-shadow-pop-top'>Planets</p></button>
           <button onClick={()=>handleCategory('starships')}><p className='text-shadow-pop-top'>Starships</p></button>
         </div>
+
+        {showWelcome &&
+          <div className="welcome">
+          <p className="welcomeP1">Welcome to the Star Wars Universe!</p>
+          <p>
+            This project is powered by the <a href="https://swapi.py4e.com/" target="_blank" rel="noopener noreferrer">Star Wars API (SWAPI)</a>, a rich open-source database full of details about your favorite galaxy far, far away.
+          </p>
+          <p>
+            Here you’ll find a curated collection of characters, planets, ships, and movies — all gathered in one interactive place for fans and explorers alike.
+          </p>
+          <p>
+            Dive into the lore, relive the saga, and browse the visual gallery to see the epic moments that shaped a generation.
+          </p>
+          <p>
+            Enjoy your journey across the stars... and may the Force be with you.
+          </p>
+        </div>
+        }
 
         {showInfo &&
           <>

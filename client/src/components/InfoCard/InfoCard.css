@@ -29,22 +29,10 @@
       gap: 0.5rem;
       
       .miniCard {
+        --transition: transform 0.4s ease, opacity 0.4s ease;
+        opacity: 1;
         object-fit: contain;
         text-align: center;
-
-        &:hover {
-          p {
-            visibility: visible;
-            transform: scale(1.25);
-            transition: transform 0.4s ease;
-          }
-          
-          img {
-            transition: transform 0.4s ease;
-            transform: scale(0.95);
-            filter: opacity(0.5);
-          }
-        }
         
         img {
           border-radius: 0.2rem;
@@ -52,14 +40,30 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: var(--transition);
+          opacity: 1;
         }
 
         p {
           position: relative;
           top: 85%;
           z-index: 1;
-          visibility: hidden;
           font-weight: 900;
+          transition: var(--transition);
+          opacity: 0;
+        }
+
+        
+        &:hover {
+          p {
+            transform: scale(1.25);
+            opacity: 1;
+          }
+          
+          img {
+            transform: scale(0.95);
+            opacity: 0.5;
+          }
         }
       }
     }

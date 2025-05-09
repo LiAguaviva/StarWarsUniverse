@@ -10,6 +10,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'sairaBold';
+  src: url('/fonts/ttf/saira-condensed-latin-500-normal.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sairaBolder';
+  src: url('/fonts/ttf/saira-condensed-latin-900-normal.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
 .galaxy {
     position: fixed;
     z-index: -1;
