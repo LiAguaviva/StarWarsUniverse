@@ -8,6 +8,7 @@
 
   .arrow {
     height: 2rem;
+    cursor: pointer;
 
     &:hover {
       transition: transform 0.2s ease;

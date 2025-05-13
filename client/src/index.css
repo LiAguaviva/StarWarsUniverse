@@ -6,6 +6,7 @@
 
 body, button, textarea {
   font-family: 'saira', sans-serif !important;
+  letter-spacing: 2px;
   color: blue;
 }
 

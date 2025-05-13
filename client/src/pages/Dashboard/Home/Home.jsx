@@ -30,22 +30,22 @@ export const Home = () => {
   }, []) */
 
   useEffect(() => {
-    getData(category)
-      .then((res) => {
-        setData(res.data);
-        if (selectedItem) {
-          axios.get(selectedItem.url)
-            .then(res => {
-              setDataInfo(res.data);
-            });
-            setSelectedItem(null); 
-        } else {
-          setDataInfo(res.data.results[0]); // usamos el primero
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      getData(category)
+        .then((res) => {
+          setData(res.data);
+          if (selectedItem) {
+            axios.get(selectedItem.url)
+              .then(res => {
+                setDataInfo(res.data);
+              });
+              setSelectedItem(null); 
+          } else {
+            setDataInfo(res.data.results[0]);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }, [category]);
     
     const handleCategory = (cat) => {
@@ -80,7 +80,7 @@ export const Home = () => {
   const selectItem = (item) => setDataInfo(item);
   
   // console.log('data', data);
-  console.log('datainfo', dataInfo);
+  // console.log('datainfo', dataInfo);
 
   
   
@@ -136,8 +136,6 @@ export const Home = () => {
             <InfoCard 
               dataInfo={dataInfo} 
               category={category}
-              handleCategory={handleCategory}
-              selectItem={selectItem}
               handleNavigation={handleNavigation}
               />
           </div>

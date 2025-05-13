@@ -5,6 +5,7 @@
 
   
   .swLogoHome {
+    cursor: pointer;
     width: 20rem;
     max-width: 70vw;
     margin-inline: auto;
@@ -30,6 +31,7 @@
       color: var(--mid3);
       font-size: 1.5rem;
       font-weight: 600;
+      cursor: pointer;
     }
     
     p {
@@ -83,11 +85,13 @@
 
     p {
       line-height: 1.5;
+      margin-bottom: 1.5rem;
     }
 
     a {
       color: var(--mid3);
       text-decoration: none;
+      cursor: pointer;
     }
   }
 

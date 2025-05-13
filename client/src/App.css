@@ -1,6 +1,7 @@
 
 .spin {
   animation: fa-spin 0.8s infinite linear;
+  height: 2rem;
 }
 
 @font-face {

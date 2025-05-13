@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { useNavigate } from 'react-router-dom';
 import { getIdFromUrl } from '../../utils/utils';
 import axios from 'axios';
 import { DataFilms } from './DataFilms';
 import './InfoCard.css'
+import { DataCharacters } from './DataCharacters';
+import { DataVehicles } from './DataVehicles';
+import { DataSpecies } from './DataSpecies';
+import { DataPlanets } from './DataPlanets';
+import { DataStarships } from './DataStarships';
 
-export const InfoCard = ({dataInfo, category, selectItem, handleCategory, handleNavigation}) => {
+export const InfoCard = ({dataInfo, category, handleNavigation}) => {
 
   const {url} = dataInfo;
   
-  const [homeworld, setHomeworld] = useState('unknown')
   const [relatedData, setRelatedData] = useState({
     films: [],
     characters: [],
@@ -17,47 +21,58 @@ export const InfoCard = ({dataInfo, category, selectItem, handleCategory, handle
     species: [],
     starships: [],
     vehicles: [],
+    pilots: [],
+    homeworld: [],
   })
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => {
-        setHomeworld(res.dataInfo.homeworld)
-      })
-      .catch((error) => {
-        console.log(error);
-        
-      })
-  }, [])
 
   useEffect(() => {
-    const categoriesToFetch = ['characters', 'planets', 'species', 'starships', 'vehicles', 'films'];
-  
-    const fetchRelatedData = async () => {
-      const newData = {};
-  
-      for (let category of categoriesToFetch) {
-        if (dataInfo[category]?.length > 0) {
-          try {
-            const responses = await Promise.all(
-              dataInfo[category].map(url => axios.get(url))
-            );
-            newData[category] = responses.map(res => ({
-              name: res.data.name || res.data.title,
-              url: res.config.url
-            }));
-          } catch (err) {
-            console.error(`Error fetching ${category}:`, err);
-            newData[category] = ['Error'];
-          }
-        } else {
-          newData[category] = [];
-        }
+    const categoriesToFetch = [
+      'films', 'characters', 'planets', 'species', 'starships', 'vehicles', 'pilots', 'homeworld'
+  ];
+
+  const fetchRelatedData = async () => {
+  const newData = {};
+
+  for (let category of categoriesToFetch) {
+    let dataKey;
+
+    if (category === 'characters') {
+      if (dataInfo.people) {
+        dataKey = 'people';
+      } else if (dataInfo.residents) {
+        dataKey = 'residents';
+      } else if (dataInfo.characters) {
+        dataKey = 'characters';
+      } else {
+        dataKey = null;
       }
+    } else {
+      dataKey = category;
+    }
+
+    if (dataKey && Array.isArray(dataInfo[dataKey]) && dataInfo[dataKey].length > 0) {
+      try {
+        const responses = await Promise.all(
+          dataInfo[dataKey].map(url => axios.get(url))
+        );
+        newData[category] = responses.map(res => ({
+          name: res.data.name || res.data.title,
+          url: res.config.url
+        }));
+      } catch (err) {
+        console.error(`Error fetching ${category}:`, err);
+        newData[category] = ['Error'];
+      }
+    } else {
+      newData[category] = [];
+    }
+  }
+
+  setRelatedData(newData);
+};
+
   
-      setRelatedData(newData);
-    };
   
     if (dataInfo?.url) {
       fetchRelatedData();
@@ -72,19 +87,7 @@ export const InfoCard = ({dataInfo, category, selectItem, handleCategory, handle
     }
   }
 
-  // const navigate = useNavigate();
   
-  // const handleNavigation = (category, id) => {
-  //   navigate(`https://swapi.py4e.com/api/${category}/${id}`)
-  // }
-
-
-
-
-  // console.log('datainfo', dataInfo);
-  console.log('homeworld', homeworld);
-  
-
   return (
     <div className='infoCard'>
       <img 
@@ -92,104 +95,66 @@ export const InfoCard = ({dataInfo, category, selectItem, handleCategory, handle
         className='infoImg'
         alt="" 
         onError={useBrokenImg}
-        />
+      />
 
-        <h2>{dataInfo.name && dataInfo.name}</h2>
-        <h2>{dataInfo.title && dataInfo.title}</h2>
+      <h2>{dataInfo.name && dataInfo.name}</h2>
+      <h2>{dataInfo.title && dataInfo.title}</h2>
+
       {category === 'films' &&
           <DataFilms 
             dataInfo={dataInfo} 
             relatedData={relatedData}
             useBrokenImg={useBrokenImg}
-            // handleNavigation2={handleNavigation2}
-            selectItem={selectItem}
-            handleCategory={handleCategory}
-            category={category}
             handleNavigation={handleNavigation}
           />
       }
 
       {category === 'people' &&
-          <>
-            <p>Birthday: {dataInfo.birth_year}</p>
-            <p>Eye color: {dataInfo.eye_color}</p>
-            <p>Hair color: {dataInfo.hair_color}</p>
-            <p>Height: {dataInfo.height}</p>
-            <p>Gender: {dataInfo.gender}</p>
-            <p>Mass: {dataInfo.mass}</p>
-            {/* <p>Homeworld: {dataInfo.homeworld}</p> */}
-            
-            <p>Films: {relatedData.films.join(', ')}</p>
-            <p>Starships: {relatedData.starships.join(', ')}</p>
-            <p>Planets: {relatedData.planets.join(', ')}</p>
-            <p>Vehicles: {relatedData.vehicles.join(', ')}</p>
-            <p>Species: {relatedData.species.join(', ')}</p>
-          </>
-        }
+          <DataCharacters 
+            dataInfo={dataInfo} 
+            relatedData={relatedData}
+            useBrokenImg={useBrokenImg}
+            handleNavigation={handleNavigation}
+          />
+      }
 
-        {category === 'vehicles' &&
-            <>
-              <p>Consumables: {dataInfo.consumables}</p>
-              <p>cost in credits: {dataInfo.cost_in_credits}</p>
-              <p>Crew: {dataInfo.crew}</p>
-              <p>Length: {dataInfo.length}</p>
-              <p>manufacturer: {dataInfo.manufacturer}</p>
-              <p>max atmosphering speed: {dataInfo.max_atmosphering_speed
-              }</p>
-              <p>model: {dataInfo.model}</p>
-              <p>Passengers: {dataInfo.passengers}</p>
-              <p>Vehicle class: {dataInfo.vehicle_class}</p>
-              <p>Films: {dataInfo.films}</p>
-              <p>{dataInfo.pilots}</p>
-            </>
-          }
+      {category === 'vehicles' &&
+          <DataVehicles 
+            dataInfo={dataInfo} 
+            relatedData={relatedData}
+            useBrokenImg={useBrokenImg}
+            handleNavigation={handleNavigation}
+          />
+      }
 
-          {category === 'species' &&
-              <>
-                <p>Average height: {dataInfo.average_height}</p>
-                <p>Average lifespan: {dataInfo.average_lifespan}</p>
-                <p>Classification: {dataInfo.classification}</p>
-                <p>designation: {dataInfo.designation}</p>
-                <p>eye colors: {dataInfo.eye_colors}</p>
-                <p>hair colors: {dataInfo.hair_colors}</p>
-                <p>skin colors: {dataInfo.skin_colors}</p>
-                <p>homeworld: {dataInfo.homeworld}</p>
-                <p>language: {dataInfo.language}</p>
-                <p>people: {dataInfo.people}</p>
-              </>
-            }
 
-            {category === 'planets' &&
-              <>
-                <p>climate: {dataInfo.climate}</p>
-                <p>diameter: {dataInfo.diameter}</p>
-                <p>Classification: {dataInfo.classification}</p>
-                <p>films: {dataInfo.films}</p>
-                <p>gravity: {dataInfo.gravity}</p>
-                <p>orbital period: {dataInfo.orbital_period}</p>
-                <p>population: {dataInfo.population}</p>
-                <p>residents: {dataInfo.residents}</p>
-                <p>rotation period: {dataInfo.rotation_period}</p>
-                <p>surface water: {dataInfo.surface_water}</p>
-                <p>terrin: {dataInfo.terrin}</p>
-              </>
-            }
+      {category === 'species' &&
+        <DataSpecies 
+          dataInfo={dataInfo} 
+          relatedData={relatedData}
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
+      }
 
-            {category === 'starships' &&
-                <>
-                  <p>MGLT: {dataInfo.MGLT}</p>
-                  <p>consumables: {dataInfo.consumables}</p>
-                  <p>cost in credits: {dataInfo.cost_in_credits}</p>
-                  <p>films: {dataInfo.films}</p>
-                  <p>hyperdrive rating: {dataInfo.hyperdrive_rating}</p>
-                  <p>length: {dataInfo.length}</p>
-                  <p>manufacturer: {dataInfo.manufacturer}</p>
-                  <p>max atmosphering speed: {dataInfo.max_atmosphering_speed}</p>
-                  <p>model: {dataInfo.model}</p>
-                  <p>passengers: {dataInfo.passengers}</p>
-                  <p>starship class: {dataInfo.starship_class}</p>
-                </>
-              }
+      {category === 'planets' &&
+        <DataPlanets 
+          dataInfo={dataInfo} 
+          relatedData={relatedData}
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
+      }
+
+      {category === 'starships' &&
+        <DataStarships 
+          dataInfo={dataInfo} 
+          relatedData={relatedData}
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
+      }
+
     </div>
   )
 }
