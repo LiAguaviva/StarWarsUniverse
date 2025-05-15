@@ -47,11 +47,9 @@ This project uses [SWAPI](https://swapi.py4e.com/), a free and open-source RESTf
 
 ## 📸 Preview
 
-![Star Wars Universe screenshot](screenshots/swUniverse_home.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_Films.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_Characters.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_vehicles.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_starships.JPG)
+![Star Wars Universe screenshot](screenshots/swUniverse_gif1.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gif2.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gi3.gif)
 
 ## 🙌 Acknowledgements
 
