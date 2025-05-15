@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
-// import { useNavigate } from 'react-router-dom';
-import { getIdFromUrl } from '../../utils/utils';
 import axios from 'axios';
+import { useEffect, useState } from 'react'
+import { getIdFromUrl } from '../../utils/utils';
 import { DataFilms } from './DataFilms';
-import './InfoCard.css'
 import { DataCharacters } from './DataCharacters';
 import { DataVehicles } from './DataVehicles';
 import { DataSpecies } from './DataSpecies';
 import { DataPlanets } from './DataPlanets';
 import { DataStarships } from './DataStarships';
+import './InfoCard.css'
 
 export const InfoCard = ({dataInfo, category, handleNavigation}) => {
 
@@ -29,9 +28,9 @@ export const InfoCard = ({dataInfo, category, handleNavigation}) => {
   useEffect(() => {
     const categoriesToFetch = [
       'films', 'characters', 'planets', 'species', 'starships', 'vehicles', 'pilots', 'homeworld'
-  ];
+    ];
 
-  const fetchRelatedData = async () => {
+    const fetchRelatedData = async () => {
   const newData = {};
 
   for (let category of categoriesToFetch) {
@@ -51,7 +50,22 @@ export const InfoCard = ({dataInfo, category, handleNavigation}) => {
       dataKey = category;
     }
 
-    if (dataKey && Array.isArray(dataInfo[dataKey]) && dataInfo[dataKey].length > 0) {
+    // Caso especial para 'homeworld', que es un string
+    if (category === 'homeworld' && typeof dataInfo.homeworld === 'string') {
+      try {
+        const res = await axios.get(dataInfo.homeworld);
+        newData.homeworld = [{
+          name: res.data.name,
+          url: res.config.url
+        }];
+      } catch (err) {
+        console.error(`Error fetching homeworld:`, err);
+        newData.homeworld = ['Error'];
+      }
+    }
+
+    // Resto de casos normales (arrays de URLs)
+    else if (dataKey && Array.isArray(dataInfo[dataKey]) && dataInfo[dataKey].length > 0) {
       try {
         const responses = await Promise.all(
           dataInfo[dataKey].map(url => axios.get(url))
@@ -64,7 +78,8 @@ export const InfoCard = ({dataInfo, category, handleNavigation}) => {
         console.error(`Error fetching ${category}:`, err);
         newData[category] = ['Error'];
       }
-    } else {
+    } else if (category !== 'homeworld') {
+      // Evita sobrescribir si ya se ha resuelto en el caso especial
       newData[category] = [];
     }
   }
@@ -72,8 +87,6 @@ export const InfoCard = ({dataInfo, category, handleNavigation}) => {
   setRelatedData(newData);
 };
 
-  
-  
     if (dataInfo?.url) {
       fetchRelatedData();
     }
@@ -86,16 +99,15 @@ export const InfoCard = ({dataInfo, category, handleNavigation}) => {
       e.target.src = 'images/brokenImg.jpg';
     }
   }
-
   
   return (
     <div className='infoCard'>
-      <img 
-        src={`images/${category}/${getIdFromUrl(url)}.jpg`}  
-        className='infoImg'
-        alt="" 
-        onError={useBrokenImg}
-      />
+        <img 
+          src={`images/${category}/${getIdFromUrl(url)}.jpg`}  
+          className='infoImg'
+          alt="" 
+          onError={useBrokenImg}
+          />
 
       <h2>{dataInfo.name && dataInfo.name}</h2>
       <h2>{dataInfo.title && dataInfo.title}</h2>

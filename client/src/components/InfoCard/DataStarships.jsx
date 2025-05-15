@@ -1,8 +1,12 @@
-import { getIdFromUrl } from '../../utils/utils'
+import { RelatedGallery } from '../RelatedGallery/RelatedGallery'
+
 
 
 export const DataStarships = ({dataInfo, relatedData, useBrokenImg, handleNavigation}) => {
-
+  
+  console.log('datainfo', dataInfo);
+  console.log('relatedData', relatedData);
+  
 
   return (
    <>
@@ -19,49 +23,21 @@ export const DataStarships = ({dataInfo, relatedData, useBrokenImg, handleNaviga
       <p>Cost in credits: {dataInfo.cost_in_credits}</p>
 
       
-      {relatedData.pilots.length > 0 && (
-        <div className='dataCard'>
-          <h3>Pilots</h3>
-          <div className='relatedGallery'>
-            {relatedData.pilots.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/people/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=''
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('people', elem)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='pilots'
+          data={relatedData.pilots}
+          category='people'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
 
-      {relatedData.films.length > 0 && (
-        <div className='dataCard'>
-          <h3>Appears on</h3>
-          <div className='relatedGallery'>
-            {relatedData.films.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/films/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=''
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('films', elem)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='Appears on'
+          data={relatedData.films}
+          category='films'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
       
     </>
   )

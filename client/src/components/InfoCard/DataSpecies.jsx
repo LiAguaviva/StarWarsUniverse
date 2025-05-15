@@ -1,8 +1,11 @@
-import { getIdFromUrl } from '../../utils/utils'
+import { RelatedGallery } from '../RelatedGallery/RelatedGallery'
 
 
 export const DataSpecies = ({dataInfo, relatedData, useBrokenImg, handleNavigation}) => {
 
+  console.log('dataInfo', dataInfo);
+  console.log('relatedData', relatedData);
+  
 
   return (
     <>
@@ -15,71 +18,29 @@ export const DataSpecies = ({dataInfo, relatedData, useBrokenImg, handleNavigati
       <p>Hair colors: {dataInfo.hair_colors}</p>
       <p>Eye colors: {dataInfo.eye_colors}</p>
 
-       {relatedData.homeworld.length > 0 && (
-        <div className='dataCard'>
-          <h3>Homeworld</h3>
-          <div className='relatedGallery'>
-            {relatedData.homeworld.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/planets/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=''
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('planets', elem)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='homeworld'
+          data={relatedData.homeworld}
+          category='planets'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
 
-      {relatedData.characters.length > 0 && (
-        <div className='dataCard'>
-          <h3>Characters</h3>
-          <div className='relatedGallery'>
-            {relatedData.characters.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/people/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=''
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('people', elem)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='characters'
+          data={relatedData.characters}
+          category='people'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
 
-      {relatedData.films.length > 0 && (
-        <div className='dataCard'>
-          <h3>Films</h3>
-          <div className='relatedGallery'>
-            {relatedData.films.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/films/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=''
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('films', elem)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='Appears on'
+          data={relatedData.films}
+          category='films'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
       
     </>
   )

@@ -7,6 +7,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { InfoCard } from '../../../components/InfoCard/InfoCard';
 import { Gallery } from '../../../components/Gallery/Gallery';
 import { getData } from '../../../helpers/axiosHelper';
+import { MenuButton } from './MenuButton/MenuButton';
 
 export const Home = () => {
 
@@ -16,66 +17,58 @@ export const Home = () => {
   const [showInfo, setShowInfo] = useState(false)
   const [showWelcome, setShowWelcome] = useState(true)
   const [selectedItem, setSelectedItem] = useState('')
+  const [activeCategory, setActiveCategory] = useState('')
 
-  /* useEffect(() => {
+
+  useEffect(() => {
     getData(category)
-      .then((res)=> {
-        setData(res.data)
-        setDataInfo(res.data.results[0]);
-        // pixar: setData(res.data.films)
+      .then((res) => {
+        setData(res.data);
+        if (selectedItem) {
+          axios.get(selectedItem.url)
+            .then(res => {
+              setDataInfo(res.data);
+            });
+            setSelectedItem(null); 
+        } else {
+          setDataInfo(res.data.results[0]);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []) */
-
-  useEffect(() => {
-      getData(category)
-        .then((res) => {
-          setData(res.data);
-          if (selectedItem) {
-            axios.get(selectedItem.url)
-              .then(res => {
-                setDataInfo(res.data);
-              });
-              setSelectedItem(null); 
-          } else {
-            setDataInfo(res.data.results[0]);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, [category]);
+  }, [category]);
+  
+  const handleCategory = (cat) => {
+    setCategory(cat);
+    setShowInfo(true);
+    setShowWelcome(false);
+    setActiveCategory(cat);
+  }
     
-    const handleCategory = (cat) => {
-      setCategory(cat);
-      setShowInfo(true);
-      setShowWelcome(false);
-    }
+  const handlePage = (url)=> {
+    axios
+    .get(url)
+    .then((res) => {
+      setData(res.data)
+      selectItem(res.data.results[0])
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
     
-    const handlePage = (url)=> {
-      axios
-      .get(url)
-      .then((res) => {
-        setData(res.data)
-        selectItem(res.data.results[0])
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    }
-    
-    const handleNavigation = (newCategory, elem) => {
-      setSelectedItem(elem);
-      handleCategory(newCategory);
+  const handleNavigation = (newCategory, elem) => {
+    setSelectedItem(elem);
+    handleCategory(newCategory);
+    window.scrollTo({ top: 300 });
   };  
 
   const showHomePage = () => {
     setShowWelcome(true)
     setShowInfo(false)
+    setActiveCategory('')
   }
-
   
   const selectItem = (item) => setDataInfo(item);
   
@@ -95,12 +88,43 @@ export const Home = () => {
       {data ?
         <>
         <div className='categoryButtons'>
-          <button onClick={()=>handleCategory('films')}><p className='text-shadow-pop-top'>Movies</p></button>
-          <button onClick={()=>handleCategory('people')}><p className='text-shadow-pop-top'>Characters</p></button>
-          <button onClick={()=>handleCategory('vehicles')}><p className='text-shadow-pop-top'>Vehicles</p></button>
-          <button onClick={()=>handleCategory('species')}><p className='text-shadow-pop-top'>Species</p></button>
-          <button onClick={()=>handleCategory('planets')}><p className='text-shadow-pop-top'>Planets</p></button>
-          <button onClick={()=>handleCategory('starships')}><p className='text-shadow-pop-top'>Starships</p></button>
+          {/* <button onClick={()=>handleCategory('films')}><p className=''>Movies</p></button>
+          <button onClick={()=>handleCategory('people')}><p className=''>Characters</p></button>
+          <button onClick={()=>handleCategory('vehicles')}><p className=''>Vehicles</p></button>
+          <button onClick={()=>handleCategory('species')}><p className=''>Species</p></button>
+          <button onClick={()=>handleCategory('planets')}><p className=''>Planets</p></button>
+          <button onClick={()=>handleCategory('starships')}><p className=''>Starships</p></button> */}
+
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'films'}
+            activeCategory={activeCategory}
+            />
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'people'}
+            activeCategory={activeCategory}
+            />
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'vehicles'}
+            activeCategory={activeCategory}
+          />
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'species'}
+            activeCategory={activeCategory}
+            />
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'planets'}
+            activeCategory={activeCategory}
+            />
+          <MenuButton
+            handleCategory={handleCategory}
+            category={'starships'}
+            activeCategory={activeCategory}
+          />
         </div>
 
         {showWelcome &&

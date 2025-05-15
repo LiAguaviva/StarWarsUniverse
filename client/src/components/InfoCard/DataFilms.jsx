@@ -1,4 +1,3 @@
-import { getIdFromUrl } from '../../utils/utils'
 import { RelatedGallery } from '../RelatedGallery/RelatedGallery'
 
 
@@ -20,29 +19,6 @@ export const DataFilms = ({dataInfo, relatedData, useBrokenImg, handleNavigation
       <p>Starships: {relatedData.starships.map(c => c.name).join(', ')}</p>
       <p>Vehicles: {relatedData.vehicles.map(c => c.name).join(', ')}</p> */}
 
-      {/* {relatedData.characters.length > 0 && (
-        <div className='dataCard'>
-          <h3>Characters</h3>
-          <div className='relatedGallery'>
-            {relatedData.characters.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-                >
-                <p>{elem.name}</p>
-                  <img
-                    src={`images/people/${getIdFromUrl(elem.url)}.jpg`}
-                    alt=""
-                    onError={useBrokenImg}
-                    onClick={() => handleNavigation('people', elem)}
-                    />
-              </div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
-      {relatedData.characters.length > 0 && (
         <RelatedGallery 
           title='Related characters'
           data={relatedData.characters}
@@ -50,95 +26,38 @@ export const DataFilms = ({dataInfo, relatedData, useBrokenImg, handleNavigation
           useBrokenImg={useBrokenImg}
           handleNavigation={handleNavigation}
         />
-      )}
 
-      {relatedData.planets.length > 0 && (
-        <div className='dataCard'>
-          <h3>Planets</h3>
-          <div className='relatedGallery'>
-            {relatedData.planets.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/planets/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=""
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('planets', elem)}
-                  />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='Related Planets'
+          data={relatedData.planets}
+          category='planets'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
 
-      {relatedData.starships?.length > 0 && (
-        <div className='dataCard'>
-          <h3>Starships</h3>
-          <div className='relatedGallery'>
-            {relatedData.starships.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/starships/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=""
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('starships', elem)}
-                  />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='Related Starships'
+          data={relatedData.starships}
+          category='starships'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
 
-      {relatedData.starships?.length > 0 && (
-        <div className='dataCard'>
-          <h3>Vehicles</h3>
-          <div className='relatedGallery'>
-            {relatedData.vehicles.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/vehicles/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=""
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('vehicles', elem)}
-                  />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      
-      {relatedData.species.length > 0 && (
-        <div className='dataCard'>
-          <h3>Species</h3>
-          <div className='relatedGallery'>
-            {relatedData.species.map((elem, i) => (
-              <div 
-                className='miniCard'
-                key={i}
-              >
-                <p>{elem.name}</p>
-                <img 
-                  src={`images/species/${getIdFromUrl(elem.url)}.jpg`}
-                  alt=""
-                  onError={useBrokenImg}
-                  onClick={() => handleNavigation('species', elem)}
-                  />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        <RelatedGallery 
+          title='Related Vehicles'
+          data={relatedData.vehicles}
+          category='vehicles'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
+
+        <RelatedGallery 
+          title='Related Species'
+          data={relatedData.species}
+          category='species'
+          useBrokenImg={useBrokenImg}
+          handleNavigation={handleNavigation}
+        />
     </>
   )
 }
