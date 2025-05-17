@@ -11,6 +11,12 @@
 - 🎨 Highlighted active categories and dynamic UI.
 - 🚀 Scrolls to top automatically when navigating between categories.
 
+## 📸 Preview
+
+![Star Wars Universe screenshot](screenshots/swUniverse_gif1.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gif2.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gi3.gif)
+
 ## 🛠️ Tech Stack
 
 - **React**
@@ -44,14 +50,6 @@ The app will be available at [http://localhost:5173](http://localhost:5173)
 ## 🌍 API
 
 This project uses [SWAPI](https://swapi.py4e.com/), a free and open-source RESTful API that provides detailed information about the Star Wars universe.
-
-## 📸 Preview
-
-![Star Wars Universe screenshot](screenshots/swUniverse_home.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_Films.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_Characters.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_vehicles.JPG)
-![Star Wars Universe screenshot](screenshots/swUniverse_starships.JPG)
 
 ## 🙌 Acknowledgements
 
