@@ -17,7 +17,6 @@
 - 🎨 Highlighted active categories and dynamic UI.
 - 🚀 Scrolls to top automatically when navigating between categories.
 
-
 ## 🛠️ Tech Stack
 
 - **React**
