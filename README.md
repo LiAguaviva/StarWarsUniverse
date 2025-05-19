@@ -2,6 +2,11 @@
 
 **Star Wars Universe** is an interactive web app built with React and powered by the [Star Wars API (SWAPI)](https://swapi.py4e.com/). It offers an engaging experience for fans and explorers to dive into the lore of a galaxy far, far away.
 
+## 📸 Preview
+
+![Star Wars Universe screenshot](screenshots/swUniverse_gif_1.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gif_2.gif)
+![Star Wars Universe screenshot](screenshots/swUniverse_gif_3.gif)
 ## ✨ Features
 
 - 🌌 Explore characters, planets, species, and films from the Star Wars universe.
@@ -11,11 +16,6 @@
 - 🎨 Highlighted active categories and dynamic UI.
 - 🚀 Scrolls to top automatically when navigating between categories.
 
-## 📸 Preview
-
-![Star Wars Universe screenshot](screenshots/swUniverse_gif1.gif)
-![Star Wars Universe screenshot](screenshots/swUniverse_gif2.gif)
-![Star Wars Universe screenshot](screenshots/swUniverse_gi3.gif)
 
 ## 🛠️ Tech Stack
 
