@@ -7,6 +7,7 @@
 ![Star Wars Universe screenshot](screenshots/swUniverse_gif_1.gif)
 ![Star Wars Universe screenshot](screenshots/swUniverse_gif_2.gif)
 ![Star Wars Universe screenshot](screenshots/swUniverse_gif_3.gif)
+
 ## ✨ Features
 
 - 🌌 Explore characters, planets, species, and films from the Star Wars universe.
