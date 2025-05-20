@@ -11,7 +11,6 @@
 ## ✨ Features
 
 - 🌌 Explore characters, planets, species, and films from the Star Wars universe.
-- 🔍 Search and filter entities with ease.
 - 🖼️ Visual gallery with local images for each category.
 - 🎯 Smooth navigation between related entities.
 - 🎨 Highlighted active categories and dynamic UI.
@@ -58,7 +57,7 @@ This project uses [SWAPI](https://swapi.py4e.com/), a free and open-source RESTf
 ## 🧑‍🚀 Author
 
 Made with ❤️ by **Li Aguaviva**  
-[Portfolio](https://li_aguaviva.artstation.com)
+[3DPortfolio](https://li_aguaviva.artstation.com)
 
 ---
 
