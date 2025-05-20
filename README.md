@@ -21,7 +21,6 @@
 
 - **React**
 - **React Router**
-- **Tailwind CSS**
 - **SWAPI (Star Wars API)**
 
 ## 📦 Installation
